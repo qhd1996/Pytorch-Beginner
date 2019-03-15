@@ -62,7 +62,7 @@ for epoch in range(100):
         # forward
         out = ngrammodel(word)
         loss = criterion(out, label)
-        running_loss += loss.data[0]
+        running_loss += loss.data
         # backward
         optimizer.zero_grad()
         loss.backward()
@@ -73,5 +73,5 @@ word, label = trigram[3]
 word = Variable(torch.LongTensor([word_to_idx[i] for i in word]))
 out = ngrammodel(word)
 _, predict_label = torch.max(out, 1)
-predict_word = idx_to_word[predict_label.data[0][0]]
+predict_word = idx_to_word[predict_label.data[0].item()]
 print('real word is {}, predict word is {}'.format(label, predict_word))
